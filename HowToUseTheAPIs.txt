@@ -1,0 +1,7 @@
+************** SPEAKER RECOGNITION API **************
+Language: JSON
+Links:
+https://docs.microsoft.com/en-us/azure/cognitive-services/speaker-recognition/home
+
+Directions for connecting to Python are at the bottom of this link:
+https://westus.dev.cognitive.microsoft.com/docs/services/563309b6778daf02acc0a508/operations/5645c068e597ed22ec38f42e
