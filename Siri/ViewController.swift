@@ -22,10 +22,15 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var returnDayTextField: UITextField!
     @IBOutlet weak var numOfPassengersTextField: UITextField!
     @IBOutlet weak var classTextField: UITextField!
+    @IBOutlet weak var nextPageButton: UIButton!
     
     
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         
         microphoneButton.isEnabled = false
         
@@ -64,14 +69,88 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             recognitionRequest?.endAudio()
             microphoneButton.isEnabled = false
             microphoneButton.setTitle("Start Speaking", for: .normal)
-            // check if all information is filled out
-            
+        
             // update the information in the list
+            for i in 0...7 {
+                if tempInformationList[i] != ""{
+                    finalInformationList[i] = tempInformationList[i]
+                }
+            // update the textFields
+            startingLocationTextField.text = finalInformationList[0]
+            endingLocationTextField.text = finalInformationList[1]
+            departMonthTextField.text = finalInformationList[2]
+            departDayTextField.text = finalInformationList[3]
+            returnMonthTextField.text = finalInformationList[4]
+            returnDayTextField.text = finalInformationList[5]
+            numOfPassengersTextField.text = finalInformationList[6]
+            classTextField.text = finalInformationList[7]
+                
+            // check if all information is filled out then show the button
+                var count = 0
+                for i in 0...7 {
+                    if finalInformationList[i] != "" {
+                        count += 1
+                    }
+                    if count == 8 {
+                        nextPageButton.isHidden = false
+                    }
+                }
             
+            }
             
         } else {
             startRecording()
             microphoneButton.setTitle("Stop Speaking", for: .normal)
+            if let value = startingLocationTextField.text{
+                if value != "" {
+                    finalInformationList[0] = value
+                }
+            }
+            if let value = endingLocationTextField.text{
+                if value != "" {
+                    finalInformationList[1] = value
+                }
+            }
+            if let value = departMonthTextField.text{
+                if value != "" {
+                    finalInformationList[2] = value
+                }
+            }
+            if let value = departDayTextField.text{
+                if value != "" {
+                    finalInformationList[3] = value
+                }
+            }
+            if let value = returnMonthTextField.text{
+                if value != "" {
+                    finalInformationList[4] = value
+                }
+            }
+            if let value = returnDayTextField.text{
+                if value != "" {
+                    finalInformationList[5] = value
+                }
+            }
+            if let value = numOfPassengersTextField.text{
+                if value != "" {
+                    finalInformationList[6] = value
+                }
+            }
+            if let value = classTextField.text{
+                if value != "" {
+                    finalInformationList[7] = value
+                }
+            }
+            // check if all information is filled out then show the button
+            var count = 0
+            for i in 0...7 {
+                if finalInformationList[i] != "" {
+                    count += 1
+                }
+                if count == 8 {
+                    nextPageButton.isHidden = false
+                }
+            }
         }
 	}
 
@@ -137,7 +216,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             print("audioEngine couldn't start because of an error.")
         }
         
-        textView.text = "Say something, I'm listening!"
+        textView.text = "Would you like to change or add more information..."
         
     }
     

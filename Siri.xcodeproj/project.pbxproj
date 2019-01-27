@@ -12,6 +12,8 @@
 		805027F01D389E5700CE3F1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 805027EE1D389E5700CE3F1F /* Main.storyboard */; };
 		805027F21D389E5700CE3F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 805027F11D389E5700CE3F1F /* Assets.xcassets */; };
 		805027F51D389E5700CE3F1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 805027F31D389E5700CE3F1F /* LaunchScreen.storyboard */; };
+		D494EEBA21FD279B007D317C /* listOfTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D494EEB921FD279B007D317C /* listOfTicketsViewController.swift */; };
+		D494EEBC21FD58E0007D317C /* finalDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D494EEBB21FD58E0007D317C /* finalDisplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		805027F11D389E5700CE3F1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		805027F41D389E5700CE3F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		805027F61D389E5700CE3F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D494EEB921FD279B007D317C /* listOfTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listOfTicketsViewController.swift; sourceTree = "<group>"; };
+		D494EEBB21FD58E0007D317C /* finalDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = finalDisplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				805027EA1D389E5700CE3F1F /* AppDelegate.swift */,
 				805027EC1D389E5700CE3F1F /* ViewController.swift */,
+				D494EEB921FD279B007D317C /* listOfTicketsViewController.swift */,
+				D494EEBB21FD58E0007D317C /* finalDisplayViewController.swift */,
 				805027EE1D389E5700CE3F1F /* Main.storyboard */,
 				805027F11D389E5700CE3F1F /* Assets.xcassets */,
 				805027F31D389E5700CE3F1F /* LaunchScreen.storyboard */,
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D494EEBC21FD58E0007D317C /* finalDisplayViewController.swift in Sources */,
 				805027ED1D389E5700CE3F1F /* ViewController.swift in Sources */,
+				D494EEBA21FD279B007D317C /* listOfTicketsViewController.swift in Sources */,
 				805027EB1D389E5700CE3F1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
