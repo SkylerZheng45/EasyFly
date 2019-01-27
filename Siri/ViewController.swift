@@ -1,6 +1,8 @@
 
 import UIKit
 import Speech
+import Firebase
+import FirebaseDatabase
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 	
@@ -11,11 +13,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
 
-    
+    var ref: DatabaseReference!
+    var databaseHandle:DatabaseHandle?
     // add more code
-    let URL_SAVE_TEAM = "http://192.168.1.103/MyWebService/api/createteam.php"
     
-    private var finalInformationList = ["","","","","","","",""];
+    private var finalInformationList = ["","","","","","","1",""];
     public var tempInformationList = ["","","","","","","",""];
     @IBOutlet weak var startingLocationTextField: UITextField!
     @IBOutlet weak var endingLocationTextField: UITextField!
@@ -30,6 +32,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //server
+         ref = Database.database().reference()
+        
         microphoneButton.setImage(UIImage(named: "mic"), for: .normal)
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
@@ -66,51 +72,61 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
 	}
 
+    
+    @IBAction func refreshButton(_ sender: UIButton) {
+        databaseHandle = ref.observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : String] ?? [:]
+            self.tempInformationList = [postDict["from"],postDict["to"],postDict["departMonth"],postDict["departDay"],postDict["returnMonth"],postDict["returnDay"],postDict["numOfPassengers"],postDict["class"]] as! [String]
+        })
+        
+        for i in 0...7 {
+            if tempInformationList[i] != ""{
+                finalInformationList[i] = tempInformationList[i]
+            }
+            // update the textFields
+            startingLocationTextField.text = finalInformationList[0]
+            endingLocationTextField.text = finalInformationList[1]
+            departMonthTextField.text = finalInformationList[2]
+            departDayTextField.text = finalInformationList[3]
+            returnMonthTextField.text = finalInformationList[4]
+            returnDayTextField.text = finalInformationList[5]
+            numOfPassengersTextField.text = finalInformationList[6]
+            classTextField.text = finalInformationList[7]
+        
+        var count = 0
+        for i in 0...7 {
+            if finalInformationList[i] != "" {
+                count += 1
+            }
+            if count == 8 {
+                nextPageButton.isHidden = false
+            }
+        }
+        }
+        
+    }
+    
 	@IBAction func microphoneTapped(_ sender: AnyObject) {
         if audioEngine.isRunning {
             audioEngine.stop()
             // text that will be uploaded
             print(textView.text)
             // server
-            //created NSURL
-            let requestURL = NSURL(string: URL_SAVE_TEAM)
-            //creating NSMutableURLRequest
-            let request = NSMutableURLRequest(url: requestURL! as URL)
-            //setting the method to post
-            request.httpMethod = "POST"
-            //getting values from text fields
-            let teamName = textView.text
-            let memberCount = "Nothing here"
-            //creating the post parameter by concatenating the keys and values from text field
-            let postParameters = "name="+teamName!+"&member="+memberCount;
-            //adding the parameters to request body
-            request.httpBody = postParameters.data(using: String.Encoding.utf8)
-            //creating a task to send the post request
-            let task = URLSession.shared.dataTask(with: request as URLRequest){
-                data, response, error in
-                if error != nil{
-                    print("error is \(error)")
-                    return;
-                }
-                //parsing the response
-                do {
-                    //converting resonse to NSDictionary
-                    let myJSON =  try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                    //parsing the json
-                    if let parseJSON = myJSON {
-                        //creating a string
-                        var msg : String!
-                        //getting the json response
-                        msg = parseJSON["message"] as! String?
-                        //printing the response
-                        print(msg)
-                    }
-                } catch {
-                    print(error)
-                }
-            }
-            //executing the task
-            task.resume()
+            self.ref.child("textToInterpret").setValue(textView.text+".")
+            
+            databaseHandle = ref.observe(DataEventType.value, with: { (snapshot) in
+                let postDict = snapshot.value as? [String : String] ?? [:]
+                self.tempInformationList = [postDict["from"],postDict["to"],postDict["departMonth"],postDict["departDay"],postDict["returnMonth"],postDict["returnDay"],postDict["numOfPassengers"],postDict["class"]] as! [String]
+            })
+//            databaseHandle = ref.observe(.value, with: { snapshot in
+//                for child in snapshot.children{
+//                    print("hey")
+//                    print(child)
+//
+//                }
+                    //print("yo:"+snapshot.key)
+//                })
+     
             // server
             
             recognitionRequest?.endAudio()
