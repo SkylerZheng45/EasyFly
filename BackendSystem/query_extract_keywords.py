@@ -55,11 +55,13 @@ while True:
         final_output = ['', '', '', '', '', '', '', '']
 
         # start location
+        temp_dest = ''
         for i in key_phrases_POS_tagged:
             if i[1] in ('NNP', 'NNPS') and i[0] not in ('January', 'February', 'March', 'April', 'May', 'June', 'July',
                                                         'August', 'September', 'October', 'November', 'December') \
                     and i[0] not in list(range(100)) and i[0] in important_words_msft_API:
                 final_output[0] = i[0]
+                temp_dest = i[0]
                 break
 
         # end location
@@ -67,7 +69,7 @@ while True:
             if i[1] in ('NNP', 'NNPS') and i[0] not in ('January', 'February', 'March', 'April', 'May', 'June',
                                                         'July', 'August', 'September', 'October', 'November',
                                                         'December') and i[0] not in list(range(100)) \
-                    and i[0] in important_words_msft_API:
+                    and i[0] in important_words_msft_API and i[0] != temp_dest:
                 final_output[1] = i[0]
 
         # start month
