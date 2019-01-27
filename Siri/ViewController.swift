@@ -78,6 +78,32 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             let postDict = snapshot.value as? [String : String] ?? [:]
             self.tempInformationList = [postDict["from"],postDict["to"],postDict["departMonth"],postDict["departDay"],postDict["returnMonth"],postDict["returnDay"],postDict["numOfPassengers"],postDict["class"]] as! [String]
         })
+//        if let zero = startingLocationTextField.text {
+//            if zero != ""{
+//                tempInformationList[0] = zero}
+//        }
+//        if let first = endingLocationTextField.text{
+//            if first != ""{
+//                tempInformationList[1] = first}
+//        }
+//        if let second = departMonthTextField.text{
+//            if second != ""{
+//                tempInformationList[2] = second}}
+//        if let third = departDayTextField.text{
+//            if third != ""{
+//                tempInformationList[3] = third}}
+        if let fourth = returnMonthTextField.text{
+            if fourth != ""{
+                tempInformationList[4] = fourth}}
+        if let fifth = returnDayTextField.text{
+            if fifth != ""{
+                tempInformationList[5] = fifth}}
+//        if let sixth = numOfPassengersTextField.text{
+//            if sixth != ""{
+//                tempInformationList[6] = sixth}}
+//        if let seventh = classTextField.text{
+//            if seventh != ""{
+//                tempInformationList[7] = seventh}}
         
         for i in 0...7 {
             if tempInformationList[i] != ""{
