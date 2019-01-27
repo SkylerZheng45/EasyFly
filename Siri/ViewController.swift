@@ -17,7 +17,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     var databaseHandle:DatabaseHandle?
     // add more code
     
-    private var finalInformationList = ["","","","","","","",""];
+    private var finalInformationList = ["","","","","","","1",""];
     public var tempInformationList = ["","","","","","","",""];
     @IBOutlet weak var startingLocationTextField: UITextField!
     @IBOutlet weak var endingLocationTextField: UITextField!

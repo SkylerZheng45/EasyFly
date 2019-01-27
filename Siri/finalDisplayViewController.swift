@@ -20,7 +20,7 @@ class finalDisplayViewController: UIViewController{
         self.view.addGestureRecognizer(tap)
         if let ticketInfo = ticketInfoLast{
             //edit the output things
-            displayLabel.text = ticketInfo[0]
+            displayLabel.text = ticketInfo[0]+"/n"+ticketInfo[1]+"/n"+ticketInfo[2]+"/n"+ticketInfo[3]
         }
     }
     

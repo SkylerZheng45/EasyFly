@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class listOfTicketsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let ticketList = [["DFW airport","Shanghai airport","$ 1000"], ["NYC Airport","Seattle Airport","$ 300"]]
-    var ticketInfo = ["Error"]
+    var ticketList = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
+    var ticketInfo = ""
+    var ref: DatabaseReference!
+    var databaseHandle:DatabaseHandle?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return(ticketList.count)
@@ -20,13 +24,13 @@ class listOfTicketsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.text = ticketList[indexPath.row][0]+" --> "+ticketList[indexPath.row][1]+"  \nPrice: " + ticketList[indexPath.row][2]
+        cell.textLabel?.text = ticketList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ticketInfo = ticketList[indexPath.row]
-        performSegue(withIdentifier: "showFinalPage", sender: ticketInfo)
+        performSegue(withIdentifier: "showFinalPage", sender: [ticketList[indexPath.row*4],ticketList[indexPath.row*4+1],ticketList[indexPath.row*4+2],ticketList[indexPath.row*4+3]])
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,6 +46,21 @@ class listOfTicketsViewController: UIViewController, UITableViewDelegate, UITabl
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        
+         ref = Database.database().reference()
+        
+        databaseHandle = ref.observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : String] ?? [:]
+            var tickets:[String] = []
+            var count = 1
+            for (name, info) in postDict{
+                if name == "ticketInfo" + String(count) + String(1){
+                    tickets.append(info)
+                    count+=1
+                }
+            }
+            self.ticketList = tickets
+        })
     }
     
     
