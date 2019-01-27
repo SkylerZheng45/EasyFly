@@ -10,6 +10,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+
     
     // add more code
     private var finalInformationList = ["","","","","","","",""];
@@ -66,6 +67,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 	@IBAction func microphoneTapped(_ sender: AnyObject) {
         if audioEngine.isRunning {
             audioEngine.stop()
+            // text that will be uploaded
+            print(textView.text)
+            
             recognitionRequest?.endAudio()
             microphoneButton.isEnabled = false
             microphoneButton.setImage(UIImage(named: "mic"), for: .normal)
