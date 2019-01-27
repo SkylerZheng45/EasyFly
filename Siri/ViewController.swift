@@ -12,7 +12,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let audioEngine = AVAudioEngine()
     
     // add more code
-    private var finalInformationList = ["","","","","","","","Any"];
+    private var finalInformationList = ["","","","","","","",""];
     public var tempInformationList = ["","","","","","","",""];
     @IBOutlet weak var startingLocationTextField: UITextField!
     @IBOutlet weak var endingLocationTextField: UITextField!
@@ -27,7 +27,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
 	override func viewDidLoad() {
         super.viewDidLoad()
-        
+        microphoneButton.setImage(UIImage(named: "mic"), for: .normal)
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
@@ -68,8 +68,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             audioEngine.stop()
             recognitionRequest?.endAudio()
             microphoneButton.isEnabled = false
-            microphoneButton.setTitle("Start Speaking", for: .normal)
-        
+            microphoneButton.setImage(UIImage(named: "mic"), for: .normal)
             // update the information in the list
             for i in 0...7 {
                 if tempInformationList[i] != ""{
@@ -100,7 +99,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             
         } else {
             startRecording()
-            microphoneButton.setTitle("Stop Speaking", for: .normal)
+            microphoneButton.setImage(UIImage(named: "micRecording"), for: .normal)
             if let value = startingLocationTextField.text{
                 if value != "" {
                     finalInformationList[0] = value

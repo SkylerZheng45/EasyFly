@@ -9,6 +9,8 @@
 import UIKit
 
 class finalDisplayViewController: UIViewController{
+    var ticketInfoLast:Array<String>?
+    @IBOutlet weak var displayLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +18,9 @@ class finalDisplayViewController: UIViewController{
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        if let ticketInfo = ticketInfoLast{
+            displayLabel.text = ticketInfo[0]
+        }
     }
     
     

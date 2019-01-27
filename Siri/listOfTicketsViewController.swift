@@ -19,15 +19,23 @@ class listOfTicketsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = ticketList[indexPath.row][0]+" --> "+ticketList[indexPath.row][1]+"  Price: " + ticketList[indexPath.row][2]
+        cell.textLabel?.numberOfLines = 0;
+        cell.textLabel?.text = ticketList[indexPath.row][0]+" --> "+ticketList[indexPath.row][1]+"  \nPrice: " + ticketList[indexPath.row][2]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ticketInfo = ticketList[indexPath.row]
-        performSegue(withIdentifier: "showFinalPage", sender: self)
+        performSegue(withIdentifier: "showFinalPage", sender: ticketInfo)
     }
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let viewEdit = segue.destination as? finalDisplayViewController{
+                viewEdit.ticketInfoLast = sender as? Array
+            }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
