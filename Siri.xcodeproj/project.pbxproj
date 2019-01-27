@@ -131,7 +131,7 @@
 				TargetAttributes = {
 					805027E61D389E5700CE3F1F = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = K4CS9V3KBT;
+						DevelopmentTeam = TZ4P8P7FZG;
 						DevelopmentTeamName = "Stephen Edrisian";
 						ProvisioningStyle = Automatic;
 					};
@@ -366,7 +366,7 @@
 			baseConfigurationReference = 654C4656B02C23B974C608E4 /* Pods-Siri.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K4CS9V3KBT;
+				DEVELOPMENT_TEAM = TZ4P8P7FZG;
 				INFOPLIST_FILE = Siri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Siri;
@@ -380,7 +380,7 @@
 			baseConfigurationReference = C2B860FAFB5F283602950DBF /* Pods-Siri.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = K4CS9V3KBT;
+				DEVELOPMENT_TEAM = TZ4P8P7FZG;
 				INFOPLIST_FILE = Siri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Siri;
