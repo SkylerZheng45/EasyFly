@@ -19,6 +19,7 @@ class finalDisplayViewController: UIViewController{
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         if let ticketInfo = ticketInfoLast{
+            //edit the output things
             displayLabel.text = ticketInfo[0]
         }
     }
