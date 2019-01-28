@@ -12,7 +12,6 @@ import FirebaseDatabase
 
 class listOfTicketsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var ticketList = ["$100    AA342   AirbusA370","Departure time: 8:00AM","Arrival time: 4PM","Duration: 8 hours","$150    AA2643   Boeing747","Departure time: 6:00AM","Arrival time: 5PM","Duration: 9 hours","230    AA846   Boeing787","Departure time: 4:00AM","Arrival time: 13AM","Duration: 9 hours","","","","","","","","","","","","","","","","","","",]
     var ticketInfo = ""
     var ref: DatabaseReference!
     var databaseHandle:DatabaseHandle?
